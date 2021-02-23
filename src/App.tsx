@@ -1,8 +1,14 @@
-import React from 'react';
+import { ExperienceBar } from './components/ExperienceBar';
+import GlobalStyle from './styles/global';
 
 function App() {
   return (
-    <h1>Moovit</h1>
+    <>
+      <div className="container">
+        <ExperienceBar />
+      </div>
+      <GlobalStyle />
+    </>
   );
 }
 
