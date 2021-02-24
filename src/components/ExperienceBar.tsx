@@ -1,4 +1,4 @@
-import * as Styles from '../styles/experienceBarStyles';
+import * as Styles from '../styles/components/experienceBarStyles';
 
 export function ExperienceBar() {
     return (
