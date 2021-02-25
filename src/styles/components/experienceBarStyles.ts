@@ -7,6 +7,8 @@ interface ProgressProps {
 export const Header = styled.div`
     display: flex;
     align-items:center;
+    margin-bottom: 2rem;
+    min-width:17.875rem;
 `;
 
 export const Span = styled.span`
