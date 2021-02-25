@@ -55,7 +55,7 @@ export const Main = styled.main`
     }
 `;
 
-export const IconBody = styled.img`
+export const Icon = styled.img`
     width: 8.75rem;
 `;
 
