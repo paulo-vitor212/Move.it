@@ -29,6 +29,7 @@ export const Progress = styled.div`
     border-radius: 4px;
     background:var(--green);
     width: ${(props: ProgressProps) => props.progress ? props.progress : 0}%;
+    transition: all 0.5s;
 `;
 
 export const CurrentExperience = styled.div`
@@ -36,4 +37,5 @@ export const CurrentExperience = styled.div`
     top:12px;
     left: ${(props: ProgressProps) => props.progress ? props.progress : 0}%;
     transform: translateX(-50%);
+    transition: all 0.5s;
 `
