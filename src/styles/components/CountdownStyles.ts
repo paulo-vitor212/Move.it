@@ -76,5 +76,16 @@ export const CountdownPauseButton = styled(Button)`
     }
 `;
 
+export const CountdownDisabledButton = styled(Button)`
+    background: var(--white);
+    color: var(--text);
+    border-bottom: 5px solid var(--green);
+    cursor:not-allowed;
+    &:hover{
+        background: var(--white);
+        color: var(--text);
+    }
+`;
+
 
 

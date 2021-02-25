@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import * as Styles from '../styles/components/CountdownStyles';
 
+let countdownTimeout: NodeJS.Timeout;
+
 export function Countdown() {
-    const [time, setTime] = useState(25 * 60);
-    const [start, setStart] = useState(false);
+    const [time, setTime] = useState(0.1 * 60);
+    const [isStart, setIsStart] = useState(false);
+    const [hasFinished, setHasFinished] = useState(false);
 
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
@@ -12,15 +15,23 @@ export function Countdown() {
     const [leftSecond, rightSecond] = String(seconds).padStart(2, '0').split('');
 
     useEffect(() => {
-        if (start && time > 0) {
-            setTimeout(() => {
+        if (isStart && time > 0) {
+            countdownTimeout = setTimeout(() => {
                 setTime(time - 1)
             }, 1000);
+        } else if (isStart && time === 0) {
+            console.log('finalizou');
+            setHasFinished(true);
+            setIsStart(false);
         }
-    }, [start, time]);
+    }, [isStart, time]);
 
     function handleClick() {
-        setStart(!start);
+        if (isStart) {
+            clearTimeout(countdownTimeout);
+            setTime(0.1 * 60);
+        }
+        setIsStart(!isStart);
     }
 
     return (
@@ -44,16 +55,24 @@ export function Countdown() {
                     </Styles.RightSpan>
                 </Styles.NumbersContainer>
             </Styles.Container>
-            {start ? (
-                <Styles.CountdownPauseButton onClick={handleClick}>
-                    Abandonar ciclo
-                </Styles.CountdownPauseButton>
+            {hasFinished ? (
+                <Styles.CountdownDisabledButton onClick={handleClick} disabled>
+                    Ciclo encerrado
+                </Styles.CountdownDisabledButton>
             ) : (
-                    <Styles.CountdownButton onClick={handleClick}>
-                        Iniciar um ciclo
-                    </Styles.CountdownButton>
-                )
-            }
+                    <>
+                        {isStart ? (
+                            <Styles.CountdownPauseButton onClick={handleClick}>
+                                Abandonar ciclo
+                            </Styles.CountdownPauseButton>
+                        ) : (
+                                <Styles.CountdownButton onClick={handleClick}>
+                                    Iniciar um ciclo
+                                </Styles.CountdownButton>
+                            )
+                        }
+                    </>
+                )}
         </>
     );
 }
